@@ -1,0 +1,20 @@
+@import "https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap";
+.howToPlay-container {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding-top: 100px;
+  display: flex;
+}
+
+.howToPlay-text {
+  letter-spacing: 0;
+  text-align: center;
+  font-family: Work Sans, sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 40px;
+}
+
+/*# sourceMappingURL=index.7cc20aab.css.map */

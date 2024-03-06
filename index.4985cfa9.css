@@ -1,0 +1,34 @@
+.result-container {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  margin: 0;
+  display: flex;
+}
+
+.GANASTE {
+  background-color: #888949;
+  border: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+}
+
+.PERDISTE, .EMPATE {
+  background-color: #894949;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+/*# sourceMappingURL=index.4985cfa9.css.map */
