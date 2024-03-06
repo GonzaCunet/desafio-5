@@ -18,6 +18,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 250px;
+  gap: 100px;
 }
 @media (max-width: 960px) {
   .home-container {
@@ -33,6 +35,7 @@ body {
 .hands-container {
   position: absolute;
   bottom: 0px;
+  gap: 50px;
 }
 @media (max-width: 960px) {
   .hands-container {

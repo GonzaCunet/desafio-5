@@ -35,6 +35,7 @@ class HandComponent extends HTMLElement {
         .hand-imagenGrande{
           width:200px;
           height:300px;
+          
         }
 			}
 		}

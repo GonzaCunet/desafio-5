@@ -14,12 +14,13 @@
 .circle {
   width: 200px;
   height: 200px;
-  background-color: blue;
+  background-color: white;
   border-radius: 50%;
+  border: solid 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: black;
   font-size: 35px;
   margin-top: 300px;
 }

@@ -1,12 +1,13 @@
 import { initHome } from "./pages/home/home";
 import { inithowToPlay } from "./pages/howToPlay/howToPlay";
+import { initResult } from "./pages/result/result";
 import { initSelectMove } from "./pages/selectMove/selectMove";
 import { initShowedMoves } from "./pages/showed-moves/showed-moves";
 
 const BASE_PATH = "/desafio-5";
 
 function isGithubPages() {
-  return location.host.includes("github.io");
+  return location.host.includes("gonzacunet.github.io");
 }
 
 const routes = [
@@ -26,43 +27,38 @@ const routes = [
     path: /\/showed-moves/,
     component: initShowedMoves,
   },
+  {
+    path: /\/result/,
+    component: initResult,
+  },
 ];
 
-export function initRouter(container: any) {
-  function goTo(path: string) {
-    history.pushState({}, "", path);
-    handleRoute(path);
+export function initRouter(container: Element) {
+  function goTo(path) {
+    const completePath = isGithubPages() ? BASE_PATH + path : path;
+    history.pushState({}, "", completePath);
+    handleRoute(completePath);
   }
-
   function handleRoute(route) {
-    if (isGithubPages()) {
-      const newRoute = route.replace(BASE_PATH, "/");
-
-      for (const r of routes) {
-        if (r.path.test(newRoute)) {
-          const el = r.component({ goTo: goTo });
-          if (container.firstChild) {
-            container.firstChild.remove();
-          }
-          container.appendChild(el);
+    //    console.log("el handle Route recibio una nueva ruta y es", route);
+    const newRoute = isGithubPages() ? route.replace(BASE_PATH, "") : route;
+    for (const r of routes) {
+      if (r.path.test(newRoute)) {
+        const el = r.component({ goTo: goTo });
+        if (container.firstChild) {
+          container.firstChild.remove();
         }
-      }
-    } else {
-      for (const r of routes) {
-        if (r.path.test(route)) {
-          const el = r.component({ goTo: goTo });
-
-          if (container.firstChild) {
-            container.firstChild.remove();
-          }
-          container.appendChild(el);
-        }
+        container.appendChild(el);
       }
     }
   }
-  if (location.pathname == "/") {
+  if (location.pathname == "/" || location.pathname == "/desafio-5/") {
     goTo("/home");
   } else {
     handleRoute(location.pathname);
   }
+
+  window.onpopstate = function () {
+    handleRoute(location.pathname);
+  };
 }

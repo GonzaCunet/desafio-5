@@ -3,11 +3,11 @@ import { jugada, state } from "../../state";
 export function initSelectMove(params) {
   const div = document.createElement("div");
   div.className = "selectMove-container";
-  let tiempoRestante = 2;
+  let tiempoRestante = 6;
   let atributoPiedra = "hand-img";
   let atributoPapel = "hand-img";
   let atributoTijera = "hand-img";
-
+  state.setMove("piedra");
   const intervalo = setInterval(() => {
     tiempoRestante--;
     div.innerHTML = `<div class="circle">
@@ -19,7 +19,7 @@ export function initSelectMove(params) {
       </div>
 
     `;
-    console.log(tiempoRestante);
+
     const piedraMove = div.querySelector(".piedra");
     const papelMove = div.querySelector(".papel");
     const tijeraMove = div.querySelector(".tijera");
@@ -28,30 +28,28 @@ export function initSelectMove(params) {
       atributoPiedra = "hand-imagenGrande";
       atributoPapel = "unpicked-hand";
       atributoTijera = "unpicked-hand";
+      state.setMove(piedraMove.getAttribute("hand") as jugada);
     });
     papelMove?.addEventListener("click", () => {
       atributoPapel = "hand-imagenGrande";
       atributoPiedra = "unpicked-hand";
       atributoTijera = "unpicked-hand";
+      state.setMove(papelMove.getAttribute("hand") as jugada);
     });
 
     tijeraMove?.addEventListener("click", () => {
       atributoTijera = "hand-imagenGrande";
       atributoPapel = "unpicked-hand";
       atributoPiedra = "unpicked-hand";
+      tijeraMove.getAttribute("hand") as jugada;
+      state.setMove(tijeraMove.getAttribute("hand") as jugada);
     });
 
     if (tiempoRestante === 0) {
-      div.querySelectorAll(".hands-container").forEach((e) => {
-        e.addEventListener("click", (selected: any) => {
-          const selectedMove = selected.target.getAttribute("hand") as jugada;
-          state.setMove(selectedMove);
-          params.goTo("/showed-moves");
-        });
-      });
+      state.setComputerMove();
       clearInterval(intervalo);
+      params.goTo("/showed-moves");
     }
   }, 1000);
-
   return div;
 }

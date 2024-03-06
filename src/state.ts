@@ -8,23 +8,32 @@ const state = {
     currentGame: {
       computerPlay: "",
       myPlay: "",
-      history: [{}],
-      listeners: [],
     },
+    history: { scoreHuman: 0, scoreComputer: 0 },
+    listeners: [],
+  },
+  setComputerMove() {
+    const randomMove = Math.floor(Math.random() * 3) + 1;
+    let computerPlay = {
+      1: "piedra",
+      2: "papel",
+      3: "tijera",
+    }[randomMove];
+    const currentState = this.getState();
+    currentState.currentGame.computerPlay = computerPlay;
   },
 
   setMove(move: jugada) {
     const currentState = this.getState();
-    console.log(currentState);
     currentState.currentGame.myPlay = move;
   },
+
   pushToHistory(play: game) {
     const currentState = this.getState();
     currentState.history(play);
   },
   whoWins(myPlay: jugada, computerPlay: jugada) {
-    let humano = 0;
-    let computadora = 0;
+    const currentState = this.getState();
     const ganeConPiedra = myPlay == "piedra" && computerPlay == "tijera";
     const ganeConTijera = myPlay == "tijera" && computerPlay == "papel";
     const ganeConPapel = myPlay == "papel" && computerPlay == "piedra";
@@ -35,18 +44,17 @@ const state = {
     const perdiConPiedra = myPlay == "piedra" && computerPlay == "papel";
     const perdiConPapel = myPlay == "papel" && computerPlay == "tijera";
     const perdiConTijera = myPlay == "tijera" && computerPlay == "piedra";
-    const humanLoss = [ganeConPapel, ganeConPiedra, ganeConTijera].includes(
+    const humanLoss = [perdiConPapel, perdiConPiedra, perdiConTijera].includes(
       true
     );
 
-    // const empateconPiedra = myPlay == "piedra" && computerPlay == "piedra";
-    // const empateConPapel = myPlay == "papel" && computerPlay == "papel";
-    // const empateConTijera = myPlay == "tijera" && computerPlay == "tijera";
     if (humanWin == true) {
-      humano++;
+      currentState.history.scoreHuman++;
+      return "ganaste";
     }
     if (humanLoss == true) {
-      computadora++;
+      currentState.history.scoreComputer++;
+      return "perdiste";
     } else {
       return "empate";
     }
