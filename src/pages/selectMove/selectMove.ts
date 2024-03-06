@@ -3,7 +3,7 @@ import { jugada, state } from "../../state";
 export function initSelectMove(params) {
   const div = document.createElement("div");
   div.className = "selectMove-container";
-  let tiempoRestante = 6;
+  let tiempoRestante = 4;
   let atributoPiedra = "hand-img";
   let atributoPapel = "hand-img";
   let atributoTijera = "hand-img";
